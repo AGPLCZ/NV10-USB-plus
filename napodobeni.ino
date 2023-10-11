@@ -54,6 +54,33 @@ void loop() {
 
   if (Serial.available()){
     byte byteIn = Serial.read();
-    // Ostatní část kódu zůstává stejná...
+    if (byteIn == 'Y'){
+      NoteAcceptor.write(172);
+      Serial.println("Accept");
+    }
+    if (byteIn == 'N'){
+      NoteAcceptor.write(173);
+      Serial.println("Decline");
+    }
+    if (byteIn == 'R'){
+      credit = 0;
+      Serial.println("Credit reset.");
+    }
+    if (byteIn == 'E'){
+      NoteAcceptor.write(184);
+      Serial.println("Acceptor enabled");
+    }
+    if (byteIn == 'D'){
+      NoteAcceptor.write(185);
+      Serial.println("Acceptor Disabled");
+    }
+    if (byteIn == 'M'){
+      NoteAcceptor.write(170);
+      Serial.println("Enable serial escrow mode");
+    }
+    if (byteIn == 'S'){
+      NoteAcceptor.write(182);
+      Serial.println("Status");
+    }
   }
 }
