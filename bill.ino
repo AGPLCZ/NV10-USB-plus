@@ -20,7 +20,7 @@ int max = 700;
 byte accepted = 0;
 
 void bill(int banknoteValue) {
-    take();
+    take(banknoteValue);
     if (accepted == 1) {
         credit += banknoteValue;
         Serial.print("Celkem přijato: ");
@@ -32,13 +32,14 @@ void bill(int banknoteValue) {
     }
 }
 
-void take() {
-  if (credit < max) {
+void take(int banknoteValue) {
+  if ((credit + banknoteValue) <= max) {
     NoteAcceptor.write(172);  // Přijmout
   } else {
     NoteAcceptor.write(173);  // Vrátit
   }
 }
+
 
 void setup() {
   Serial.begin(9600);
